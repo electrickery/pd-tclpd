@@ -1,6 +1,9 @@
 #ifndef HASHTABLE_H_INCLUDED
 #define HASHTABLE_H_INCLUDED
 
+/* in order to get strdup(), this needs to be defined */
+#define _POSIX_C_SOURCE 200809L
+
 #include <stdint.h>
 #include <stdlib.h>
 #include <string.h>

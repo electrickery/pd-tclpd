@@ -1,3 +1,7 @@
+
+/* in order to get strdup(), this needs to be defined */
+#define _POSIX_C_SOURCE 200809L
+
 #include "tclpd.h"
 #include <stdlib.h>
 #include <stdio.h>
