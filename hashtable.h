@@ -2,7 +2,7 @@
 #define HASHTABLE_H_INCLUDED
 
 /* in order to get strdup(), this needs to be defined */
-#define _POSIX_C_SOURCE 200809L
+#define _BSD_SOURCE
 
 #include <stdint.h>
 #include <stdlib.h>
