@@ -68,7 +68,7 @@ found:
     Tcl_Eval(tclpd_interp, "set current_auto_path $auto_path");
     snprintf(buf, MAXPDSTRING, "set auto_path \"{%s} $auto_path\"", dirbuf);
     Tcl_Eval(tclpd_interp, buf);
-    verbose(0, buf);
+    verbose(0, "%s", buf);
 
     // load tcl external:
     verbose(-1, "tclpd loader: loading tcl file %s", filename);
