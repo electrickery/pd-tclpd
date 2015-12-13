@@ -2,6 +2,8 @@ This repository is a clone of the Pd-extended SVN repository at https://sourcefo
 
 The main purpose for this fork is to add a more modern build system which allows creating easy distributions for multiple platforms. But some updating of documentation and help-files will also occur.
 
+<p align="center"><img src="bitmap.tcl.png">
+
 Fred Jan Kraan, 
 fjkraan@xs4all.nl,
-2015-12-12
+2015-12-13
