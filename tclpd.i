@@ -144,6 +144,7 @@ void name_setitem(type *ary, int index, type value)
 %ignore rtext_remove;
 %ignore canvas_recurapply;
 %ignore gobj_properties;
+%ignore glist_amreloadingabstractions;
 
 /* function that we don't want to wrap, because they are internal */
 %ignore tclpd_setup;
