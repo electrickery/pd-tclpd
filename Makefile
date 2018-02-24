@@ -30,23 +30,20 @@ tcl_typemap.c \
 tcl_widgetbehavior.c \
 tcl_wrap.c
 
-helppatches = 
-
 datafiles = \
 AUTHORS.txt \
 ChangeLog.txt \
 TODO.txt \
-tclpd.tcl
+tclpd.tcl \
+$(wildcard examples/*-help.pd) \
+$(wildcard examples/*.tcl)
 
-extradirs = examples
 
 externalsdir = ../..
-# include Makefile.pdlibbuilder from parent or current directory 
--include $(externalsdir)/Makefile.pdlibbuilder 
 
-ifndef Makefile.pdlibbuilder 
-include Makefile.pdlibbuilder 
-endif
+PDLIBBUILDER_DIR=.
+include $(firstword $(wildcard $(PDLIBBUILDER_DIR)/Makefile.pdlibbuilder \
+  $(externalsdir)/Makefile.pdlibbuilder))
 
 tcl_wrap.c: tclpd.i tclpd.h Makefile
 	swig -v -tcl -o tcl_wrap.c -I$(pdincludepath) tclpd.i
