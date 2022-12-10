@@ -5,5 +5,5 @@ The main purpose for this fork is to add a more modern build system which allows
 <p align="center"><img src="bitmap.tcl.png">
 
 Fred Jan Kraan, 
-fjkraan@xs4all.nl,
-2015-12-13
+fjkraan@electrickery.nl,
+2022-12-10
