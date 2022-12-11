@@ -38,16 +38,11 @@ tclpd.tcl \
 $(wildcard examples/*-help.pd) \
 $(wildcard examples/*.tcl)
 
+# hack to get a proper default target
+all:
+
+tcl_wrap.c: tclpd.i tclpd.h Makefile
+	swig -v -tcl -o tcl_wrap.c -I$(PDDIR)/src tclpd.i
 
 PDLIBBUILDER_DIR=pd-lib-builder/
 include $(PDLIBBUILDER_DIR)/Makefile.pdlibbuilder
-
-tcl_wrap.c: tclpd.i tclpd.h Makefile
-	swig -v -tcl -o tcl_wrap.c -I$(pdincludepath) tclpd.i
-
-
-# Tclpd uses swig to discover the API it should support. This seems to work now,
-# but it requires M_pd.h and g_canvas.h to be found. A quick hack of a soft-link of
-# these two files in the local directory worked.
-# ln -s $PDDIR/src/m_pd.h .
-# ln -s $PDDIR/src/g_canvas.h .
