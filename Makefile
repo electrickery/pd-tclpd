@@ -36,7 +36,8 @@ ChangeLog.txt \
 TODO.txt \
 tclpd.tcl \
 $(wildcard examples/*-help.pd) \
-$(wildcard examples/*.tcl)
+$(wildcard examples/*.tcl) \
+examples/bitmap-madness.pd
 
 # hack to get a proper default target
 all:

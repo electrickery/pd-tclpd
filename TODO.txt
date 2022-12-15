@@ -4,6 +4,8 @@ TODO-list for tclpd (most important things first)
 - slider2.tcl is broken *
 - add (or check) GOP
 - signal externals? (really?)
+- objects crash while receiving not-implemented messages 
+- gui objects implement a broken properties panel
 
 
 

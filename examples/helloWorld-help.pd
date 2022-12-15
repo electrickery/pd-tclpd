@@ -1,0 +1,13 @@
+#N canvas 2154 688 450 300 10;
+#X declare -lib tclpd;
+#X obj 169 118 helloWorld;
+#X obj 169 90 bng 15 250 50 0 empty empty empty 17 7 0 10 #fcfcfc #000000 #000000;
+#X text 17 8 The Hello World example. Outputs to the symbol box and console. Opening the object gets you the script code.;
+#X obj 14 53 declare -lib tclpd;
+#X msg 200 85 hello from tclpd!;
+#X msg 192 49 Hello World!;
+#X obj 169 144 print;
+#X connect 0 0 6 0;
+#X connect 1 0 0 0;
+#X connect 4 0 0 0;
+#X connect 5 0 0 0;

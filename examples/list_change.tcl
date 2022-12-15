@@ -24,6 +24,12 @@ proc+ list_change::0_bang {self} {
     pd::outlet $self 0 list $@curlist
 }
 
+proc+ list_change::0_anything {self args} {
+        pd::post "list_change anything"
+        set @curlist $args
+        pd::outlet $self 0 list $@curlist
+}
+
 proc+ list_change::1_list {self args} {
     # COLD inlet
     set @curlist $args

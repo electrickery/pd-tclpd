@@ -227,42 +227,50 @@ void tclpd_free(t_tcl *x) {
 }
 
 void tclpd_anything(t_tcl *x, t_symbol *s, int ac, t_atom *at) {
+//#ifdef DEBUG
+//     printf(" > tclpd_anything, ac= %i, symbol= %s\n", ac, s->s_name);
+//#endif
+        
     tclpd_inlet_anything(x, 0, s, ac, at);
 }
 
 void tclpd_inlet_anything(t_tcl *x, int inlet, t_symbol *s, int ac, t_atom *at) {
     // proxy method - format: <classname> <self> method <inlet#> <selector> args...
-    Tcl_Obj *av[ac+5]; InitArray(av, ac+5, NULL);
+    Tcl_Obj *tav[ac+5]; 
+    InitArray(tav, ac+5, NULL);
     int result;
 
-    av[0] = x->dispatcher;
-    Tcl_IncrRefCount(av[0]);
-    av[1] = x->self;
-    Tcl_IncrRefCount(av[1]);
-    av[2] = Tcl_NewStringObj("method", -1);
-    Tcl_IncrRefCount(av[2]);
-    av[3] = Tcl_NewIntObj(inlet);
-    Tcl_IncrRefCount(av[3]);
-    av[4] = Tcl_NewStringObj(s->s_name, -1);
-    Tcl_IncrRefCount(av[4]);
+    tav[0] = x->dispatcher;
+    Tcl_IncrRefCount(tav[0]);
+    tav[1] = x->self;
+    Tcl_IncrRefCount(tav[1]);
+    tav[2] = Tcl_NewStringObj("method", -1);
+    Tcl_IncrRefCount(tav[2]);
+    tav[3] = Tcl_NewIntObj(inlet);
+    Tcl_IncrRefCount(tav[3]);
+    tav[4] = Tcl_NewStringObj(s->s_name, -1);
+    Tcl_IncrRefCount(tav[4]);
     for(int i=0; i<ac; i++) {
         // NOTE: pdatom_to_tcl already calls Tcl_IncrRefCount
         //       so there is no need to call it here:
 
-        if(pdatom_to_tcl(&at[i], &av[5+i]) == TCL_ERROR) {
+        if(pdatom_to_tcl(&at[i], &tav[5+i]) == TCL_ERROR) {
 #ifdef DEBUG
             post("pdatom_to_tcl: tclpd_inlet_anything: failed during conversion. check memory leaks!");
 #endif
             goto error;
         }
     }
-    result = Tcl_EvalObjv(tclpd_interp, ac+5, av, 0);
+    result = Tcl_EvalObjv(tclpd_interp, ac+5, tav, 0);
     if(result != TCL_OK) {
+#ifdef DEBUG
+        post("pdatom_to_tcl result: tclpd_inlet_anything:  is not TCL_OK");
+#endif
         goto error;
     }
 
     for(int i=0; i < (ac+5); i++)
-        Tcl_DecrRefCount(av[i]);
+        Tcl_DecrRefCount(tav[i]);
 
     // OK
     return;
@@ -270,8 +278,8 @@ void tclpd_inlet_anything(t_tcl *x, int inlet, t_symbol *s, int ac, t_atom *at) 
 error:
     tclpd_interp_error(x, TCL_ERROR);
     for(int i=0; i < (ac+5); i++) {
-        if(!av[i]) break; // could have gone here before doing all av[]s
-        Tcl_DecrRefCount(av[i]);
+        if(!tav[i]) break; // could have gone here before doing all av[]s
+        Tcl_DecrRefCount(tav[i]);
     }
     return;
 }
@@ -361,6 +369,7 @@ t_tcl * CAST_t_tcl(t_tcl *o) {
 }
 
 void poststring2 (const char *s) {
+    printf("%s\n", s);
     post("%s", s);
 }
 
