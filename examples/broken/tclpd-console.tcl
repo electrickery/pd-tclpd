@@ -91,7 +91,8 @@ proc tclpd-console::constructor {self} {
 
 proc tclpd-console::destructor {self} {
     if {[set ::${self}_loaded]} {
-        sys_gui { destroy .pdwindow.tcl.tclpd ; unset ::tclpd_console }
+#        sys_gui { destroy .pdwindow.tcl.tclpd ; unset ::tclpd_console }
+        sys_gui { unset ::tclpd_console ; destroy .pdwindow.tcl.tclpd }
 
         pd_unbind $self $self
 

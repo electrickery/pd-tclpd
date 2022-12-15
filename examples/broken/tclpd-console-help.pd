@@ -1,0 +1,6 @@
+#N canvas 2165 721 450 300 10;
+#X declare -lib tclpd;
+#X obj 159 116 tclpd-console;
+#X text 46 62 You can get access to the Tcl console from an object:;
+#X obj 328 8 declare -lib tclpd;
+#X text 73 168 You can only create one of these objects.;
