@@ -100,12 +100,12 @@ proc+ bitmap::0_config {self args} {
             dict set newconf $k $v
             incr i
         }
-        if {[dict get $@config -uwidth] != [dict get $newconf -uwidth] ||
+        if {[dict get $@config -uwidth] != [dict get $newconf -uwidth] || 
             [dict get $@config -uheight] != [dict get $newconf -uheight]} {
-            0_resize $self {*}[pd::add_selectors [list \
-                [dict get $newconf -uwidth] \
-                [dict get $newconf -uheight] \
-                ]]
+                0_resize $self {*}[pd::add_selectors [list \
+                    [dict get $newconf -uwidth] \
+                    [dict get $newconf -uheight] \
+                    ]]
         }
         set ui 0
         foreach opt {label labelpos cellsize fgcolor bgcolor lblcolor} {
@@ -147,6 +147,9 @@ proc+ bitmap::0_config {self args} {
 }
 
 proc+ bitmap::0_resize {self args} {
+    if { [llength $args] < 2 } {
+        return -code error "resize requires two numeric arguments."
+    }
     set w [pd::arg 0 int]
     set h [pd::arg 1 int]
     set oldw [dict get $@config -uwidth]
@@ -167,9 +170,21 @@ proc+ bitmap::0_resize {self args} {
 }
 
 proc+ bitmap::0_getrow {self args} {
+    if { [llength $args] < 1 } {
+        return -code error "getrow requires one numeric argument."
+    }
     set r [list]
     set n [pd::arg 0 int]
+    if { $n < 0 } {
+        return -code error "getrow error interpreting $n as int."
+    }
     set w [dict get $@config -uwidth]
+    set h [dict get $@config -uheight]
+   
+    if { $n >= $h } {
+        return -code error "getrow row $n doesn't exist."
+    }
+
     for {set i [expr {$n*$w}]} {$i < [expr {($n+1)*$w}]} {incr i} {
         lappend r [list float [lindex $@data $i]]
     }
@@ -177,17 +192,30 @@ proc+ bitmap::0_getrow {self args} {
 }
 
 proc+ bitmap::0_getcol {self args} {
-    set r [list]
+    if { [llength $args] < 1 } {
+        return -code error "getcol requires one numeric argument."
+    }
+    set c [list]
     set n [pd::arg 0 int]
+    if { $n < 0 } {
+        return -code error "getcol $n not a valid number."
+    }
     set w [dict get $@config -uwidth]
     set h [dict get $@config -uheight]
-    for {set i [expr {$n}]} {$i < [expr {$w*$h}]} {incr i $w} {
-        lappend r [list float [lindex $@data $i]]
+
+    if { $n >= $w } {
+        return -code error "getcol column $n doesn't exist."
     }
-    pd::outlet $self 0 list $r
+    for {set i [expr {$n}]} {$i < [expr {$w*$h}]} {incr i $w} {
+        lappend c [list float [lindex $@data $i]]
+    }
+    pd::outlet $self 0 list $c
 }
 
 proc+ bitmap::0_getcell {self args} {
+    if { [llength $args] < 2 } {
+        return -code error "getcell requires two numeric arguments: "
+    }
     set r [pd::arg 0 int]
     set c [pd::arg 1 int]
     set w [dict get $@config -uwidth]
@@ -195,6 +223,9 @@ proc+ bitmap::0_getcell {self args} {
 }
 
 proc+ bitmap::0_setrow {self args} {
+    if { [llength $args] < 1 } {
+        return -code error "setrow requires one numeric argument."
+    }
     set row [pd::arg 0 int]
     set z 1
     set col 0
@@ -213,6 +244,9 @@ proc+ bitmap::0_setrow {self args} {
 }
 
 proc+ bitmap::0_setcol {self args} {
+    if { [llength $args] < 1 } {
+        return -code error "setcol requires one numeric argument."
+    }
     set col [pd::arg 0 int]
     set z 1
     set row 0
@@ -232,6 +266,9 @@ proc+ bitmap::0_setcol {self args} {
 }
 
 proc+ bitmap::0_setcell {self args} {
+    if { [llength $args] < 2 } {
+        return -code error "setcell requires two numeric arguments."
+    }
     set r [pd::arg 0 int]
     set c [pd::arg 1 int]
     set d [expr {0 != [pd::arg 2 int]}]
@@ -262,12 +299,29 @@ proc+ bitmap::0_setdata {self args} {
     }
 }
 
+proc+ bitmap::0_getdata {self} {
+    set w [dict get $@config -uwidth]
+    set h [dict get $@config -uheight]
+    set size [expr {$h*$w}]
+     
+    for {set i 0} {$i < $size} {incr i} {
+        lappend r [list float [lindex $@data $i]]
+    }
+    pd::outlet $self 0 list $r
+
+}
+
+proc+ bitmap::0_anything {self args} {
+    pd::post "bitmap doesn't support this."
+}
+
 proc+ bitmap::save {self args} {
     return [list #X obj $@x $@y bitmap {*}[pd::add_empty $@config] \; \
         \#bitmap setdata {*}$@data \; ]
 }
 
 proc+ bitmap::properties {self args} {
+    pd::post "Properties for bitmap are broken."
     set title "\[bitmap\] properties"
     set buf [list propertieswindow %s $@config $title]\n
     gfxstub_new $self $self $buf
