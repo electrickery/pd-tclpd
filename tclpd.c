@@ -45,9 +45,11 @@ void tclpd_setup(void) {
 }
 
 void tclpd_interp_error(t_tcl *x, int result) {
-    error("tclpd error: %s", Tcl_GetStringResult(tclpd_interp));
-
-    logpost(x, 3, "------------------- Tcl error: -------------------");
+    printf("tclpd error !!\n");
+    logpost(x, PD_ERROR, "------------------- Tcl error: -------------------");
+    
+    logpost(x, PD_ERROR, "%s\n", Tcl_GetStringResult(tclpd_interp));
+    printf("tclpd error: %s\n", Tcl_GetStringResult(tclpd_interp));
 
     // Tcl_GetReturnOptions and Tcl_DictObjGet only available in Tcl >= 8.5
 
@@ -58,10 +60,10 @@ void tclpd_interp_error(t_tcl *x, int result) {
     Tcl_IncrRefCount(errorInfoK);
     Tcl_DictObjGet(tclpd_interp, dict, errorInfoK, &errorInfo);
     Tcl_DecrRefCount(errorInfoK);
-    logpost(x, 3, "%s\n", Tcl_GetStringFromObj(errorInfo, 0));
+    logpost(x, PD_ERROR, "%s\n", Tcl_GetStringFromObj(errorInfo, 0));
 #else
-    logpost(x, 3, "Backtrace not available in Tcl < 8.5. Please upgrade Tcl.");
+    logpost(x, PD_ERROR, "Backtrace not available in Tcl < 8.5. Please upgrade Tcl.");
 #endif
 
-    logpost(x, 3, "--------------------------------------------------");
+    logpost(x, PD_ERROR, "--------------------------------------------------"); 
 }

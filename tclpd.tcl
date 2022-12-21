@@ -124,7 +124,7 @@ namespace eval ::pd {
             }
         "
 
-	# some dummy function to suppress eventual errors if they are not deifned:
+	# some dummy function to suppress eventual errors if they are not defined:
 	proc ::${classname}::0_loadbang {self} {}
 
         return $flag
@@ -149,7 +149,7 @@ namespace eval ::pd {
         tclpd_guiclass_new $classname $flag
     }
 
-    # wrapper to post() withouth vargs
+    # wrapper to post() without vargs
     proc post {args} {
         poststring2 [concat {*}$args]
     }
@@ -158,7 +158,7 @@ namespace eval ::pd {
         return [uplevel 1 "llength \$args"]
     }
 
-    proc arg {n {assertion any}} {
+    proc arg {n {assertion up_args}} {
         upvar 1 args up_args
         set up_args_len [llength $up_args]
         if {$n < 0 || $n >= $up_args_len} {
