@@ -19,7 +19,6 @@ updating of documentation and help-files will also occur.
         dynroute.tcl     - dynroute object; dynamic routing of key-value sets based on key-output assignments
         helloWorld.tcl   - helloWorld; simple demo object demonstrating a basic object in Tcl
         list_change.tcl  - list_change object; demonstrated Tcl list operations and Pd-Tcl list interfacing 
-        logPost.tcl      - demo object for Pd logpost API
         properties.tcl   - helper object for graphical Tcl/Tk objects, for controlling the objects properties
         slider2.tcl      - slider2 graphical object; a reimplementation of the slider object
 
