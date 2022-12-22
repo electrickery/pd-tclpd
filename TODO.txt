@@ -4,9 +4,12 @@ TODO-list for tclpd (most important things first)
 - slider2.tcl is broken *
 - add (or check) GOP
 - signal externals? (really?)
-- objects crash while receiving not-implemented messages 
++ objects crash while receiving not-implemented messages. Fixed, error in error reporting
 - gui objects implement a broken properties panel
-
++ Tcl/Tk errors are not shown, but crash Pd. Fixed, error in error reporting
+- The tclpd-console.tcl is retired as a console to Pd functionality is 
+  now standard in: File > Message...
+- introduced its own custom command to the patch file: #bitmap setdata 0 1 1 1 0 1;
 
 
 *) 

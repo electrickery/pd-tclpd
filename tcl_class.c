@@ -369,7 +369,6 @@ t_tcl * CAST_t_tcl(t_tcl *o) {
 }
 
 void poststring2 (const char *s) {
-    printf("%s\n", s);
     post("%s", s);
 }
 

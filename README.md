@@ -1,3 +1,5 @@
+# Tclpd library
+
 This repository is a clone of the Pd-extended SVN repository at 
 https://sourceforge.net/p/pure-data/svn/HEAD/tree/trunk/externals/loaders/tclpd/, 
 created via the https://git.puredata.info/cgit/ SVN-to-GIT repository 
@@ -9,10 +11,23 @@ updating of documentation and help-files will also occur.
 
 <p align="center"><img src="bitmap.tcl.png">
 
+## Objects
 
-tclpd makes all definitions in m_pd.h and g_canvas.h available via the 
-swig library (https://www.swig.org/). In addition the following procedures 
-are made available (tclpd.tcl):
+bitmap.tcl       - bitmap graphical object; an interactive two-dimensional binary matrix 
+colorpicker.tcl  - helper object for the properties object
+dynreceive.tcl   - dynreceive object; a message receive object, with dynamic receive symbol
+dynroute.tcl     - dynroute object; dynamic routing of key-value sets based on key-output assignments
+helloWorld.tcl   - helloWorld; simple demo object demonstrating a basic object in Tcl
+list_change.tcl  - list_change object; demonstrated Tcl list operations and Pd-Tcl list interfacing 
+logPost.tcl      - demo object for Pd logpost API
+properties.tcl   - helper object for graphical Tcl/Tk objects, for controlling the objects properties
+slider2.tcl      - slider2 graphical object; a reimplementation of the slider object
+
+## Helper routines
+
+Tclpd makes all definitions in m_pd.h and g_canvas.h available to Tcl/Tk 
+code via the swig library (https://www.swig.org/). In addition the 
+following procedures are made available (tclpd.tcl):
 
     proc error_msg {m} {
     proc add_inlet {self sel} {
@@ -33,9 +48,8 @@ are made available (tclpd.tcl):
     proc guiproc {name argz body} {                # mechanism for uploading procs to gui interp, without the hassle of escaping [encoder]
     proc get_binbuf {self} {
 
-The tclpd library as is, has no proper saveguards, crashing pd on every 
-unexpected mesasage or even Tcl/Tk syntax error (without error report).
+
 
 Fred Jan Kraan, 
 fjkraan@electrickery.nl,
-2022-12-15
+2022-12-22

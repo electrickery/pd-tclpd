@@ -20,16 +20,26 @@ proc+ dynreceive::destructor {self} {
 
 proc+ dynreceive::0_set {self args} {
     # send [set empty( to clear the receive symbol
-    set s [pd::arg 0 symbol]
-    if {$@sym eq {}} {
-        pd_unbind $self $@sym
+    if { [llength $args] < 1 } {
+        if {$@sym ne {}} {
+            pd_unbind $self $@sym
+        }
+        set @sym {}
+        return
     }
+    set s [pd::arg 0 symbol]
+        pd_unbind $self $@sym
     if {$s eq {empty}} {
         set @sym {}
     } else {
         set @sym $s
         pd_bind $self $@sym
     }
+}
+
+proc+ dynreceive::0_status {self args} {
+    pd::post "dynreceive status:"
+    pd::post "  sym:  $@sym"
 }
 
 proc+ dynreceive::0_bang {self} {

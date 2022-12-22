@@ -99,7 +99,7 @@ proc+ slider2::0_config2 {self args} {
 }
 
 proc+ slider2::0_config {self args} {
-    pd::post [info level 0]
+#    pd::post [info level 0]
     set newconf [list]
     set optlist [pd::strip_selectors $args]
     set optlist [pd::strip_empty $optlist]
@@ -223,7 +223,10 @@ proc+ slider2::properties {self} {
     }
 
     set c [string map {$ @} $c]
-    gfxstub_new $self $self \
+    pd::post [list propertieswindow %s $c "\[slider2\] properties"]
+#    gfxstub_new $self $self \
+#        [list propertieswindow %s $c "\[slider2\] properties"]
+    pdgui_stub_vnew $self $self "slider2prop" \
         [list propertieswindow %s $c "\[slider2\] properties"]\n
 }
 

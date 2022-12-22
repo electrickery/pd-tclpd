@@ -31,27 +31,37 @@ proc+ dynroute::0_list {self args} {
 }
 
 proc+ dynroute::1_add {self args} {
+    if { [llength $args] < 2 } {
+        return -code error "add requires two arguments <any> <int>."
+    }
     set sel [pd::arg 0 any]
     set out [pd::arg 1 int]
     if {$out < 0 || $out >= $@num_outlets} {
-        pd::post "error: add: outlet number out of range"
-        return
+        return -code error "error: add: outlet number out of range"
     }
     dict set @routing $sel $out
 }
 
 proc+ dynroute::1_remove {self args} {
+    if { [llength $args] < 2 } {
+        return -code error "remove requires two arguments <any> <int>."
+    }
     set sel [pd::arg 0 any]
     set out [pd::arg 1 int]
     if {$out < 0 || $out >= $@num_outlets} {
-        pd::post "error: add: outlet number out of range"
-        return
+        return -code error "error: remove: outlet number out of range"
     }
     catch {dict unset @routing $sel $out}
 }
 
 proc+ dynroute::1_clear {self} {
     set @routing {}
+}
+
+proc+ dynroute::1_status {self} {
+    dict for {key value} $@routing {
+        pd::post "$key: $value"
+    }
 }
 
 pd::class dynroute
