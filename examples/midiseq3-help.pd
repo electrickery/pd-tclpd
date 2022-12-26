@@ -1,0 +1,55 @@
+#N canvas 1119 167 450 740 10;
+#X obj -7508 204 notein;
+#X obj -7508 230 pack 0 0;
+#X obj -7587 342 print;
+#X obj -7436 234 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -7436 180 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+1 1;
+#X obj -7436 206 metro 500;
+#X msg -7569 117 61 \$1;
+#X msg -7678 37 127;
+#X msg -7643 37 0;
+#X msg -7677 88 127;
+#X msg -7642 88 0;
+#X msg -7677 137 127;
+#X msg -7642 137 0;
+#X msg -7677 190 127;
+#X msg -7642 190 0;
+#X msg -7568 169 82 \$1;
+#X msg -7568 69 50 \$1;
+#X msg -7568 222 93 \$1;
+#X text -7683 10 miniseq - implements a simple but appendable midi
+sequencer;
+#X text -7662 649 Any velocity other than 0 will add the note to the
+sequence. A velocity or 0 will remove it. Notes already on the sequence
+will be ignored. The miniseq object is implemented in Tcl \, demonstrating
+some list functionality. fjkraan \, 2013-12-25;
+#X obj -7477 552 noteout;
+#X obj -7503 297 list append 64 1;
+#X obj -7487 367 unpack f f f;
+#X obj -7508 257 midiseq3;
+#X connect 0 0 1 0;
+#X connect 0 1 1 1;
+#X connect 1 0 23 0;
+#X connect 3 0 23 1;
+#X connect 4 0 5 0;
+#X connect 5 0 3 0;
+#X connect 6 0 23 0;
+#X connect 7 0 16 0;
+#X connect 8 0 16 0;
+#X connect 9 0 6 0;
+#X connect 10 0 6 0;
+#X connect 11 0 15 0;
+#X connect 12 0 15 0;
+#X connect 13 0 17 0;
+#X connect 14 0 17 0;
+#X connect 15 0 23 0;
+#X connect 16 0 23 0;
+#X connect 17 0 23 0;
+#X connect 21 0 2 0;
+#X connect 21 0 22 0;
+#X connect 23 0 21 0;
+#X connect 23 0 20 0;
+#X connect 23 1 20 1;
+#X connect 23 2 20 2;

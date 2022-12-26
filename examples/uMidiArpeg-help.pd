@@ -1,0 +1,84 @@
+#N canvas 915 71 451 567 10;
+#X obj -7508 74 notein;
+#X obj -7508 100 pack 0 0;
+#X obj -7369 238 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -7369 184 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1
+0 1;
+#X msg -7678 71 127;
+#X msg -7643 71 0;
+#X msg -7677 122 127;
+#X msg -7642 122 0;
+#X msg -7677 171 127;
+#X msg -7642 171 0;
+#X msg -7677 224 127;
+#X msg -7642 224 0;
+#X obj -7508 440 noteout;
+#X obj -7566 317 print;
+#X msg -7451 121 96 2;
+#X text -7413 120 Change velocity and channel;
+#X msg -7444 146 90;
+#X text -7676 50 on;
+#X text -7642 51 off;
+#X text -7664 37 note;
+#X text -7413 144 Change velocity;
+#X obj -7498 262 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text -7482 258 stop latest note;
+#X obj -7369 210 metro 100;
+#X text -7320 189 tempo;
+#X msg -7568 103 69 \$1;
+#X msg -7569 151 72 \$1;
+#X msg -7568 203 73 \$1;
+#X msg -7568 256 77 \$1;
+#X text -7571 83 A;
+#X text -7570 131 C;
+#X text -7570 183 C#;
+#X text -7570 237 E;
+#X obj -7433 319 unpack f f f;
+#X obj -7433 346 mtof;
+#X obj -7433 372 osc~;
+#X obj -7498 240 moses 1;
+#X obj -7434 398 *~;
+#X obj -7434 425 output~;
+#X text -7665 470 Any velocity other than 0 will add the note to the
+sequence. A velocity or 0 will remove it. Notes already on the sequence
+will be ignored. The miniseq object is implemented in Tcl \, demonstrating
+some list functionality. Input can be midi or the four random notes
+at the left. fjkraan \, 2014-01-10;
+#X text -7606 4 miniseq - implements a simple but appendable midi arpeggiator/sequencer
+;
+#X text -7379 166 on/off;
+#X obj -7508 291 uMidiArpeg;
+#X connect 0 0 1 0;
+#X connect 0 1 1 1;
+#X connect 1 0 42 0;
+#X connect 2 0 42 1;
+#X connect 3 0 23 0;
+#X connect 3 0 36 0;
+#X connect 4 0 25 0;
+#X connect 5 0 25 0;
+#X connect 6 0 26 0;
+#X connect 7 0 26 0;
+#X connect 8 0 27 0;
+#X connect 9 0 27 0;
+#X connect 10 0 28 0;
+#X connect 11 0 28 0;
+#X connect 14 0 42 1;
+#X connect 16 0 42 1;
+#X connect 21 0 42 0;
+#X connect 23 0 2 0;
+#X connect 25 0 42 0;
+#X connect 26 0 42 0;
+#X connect 27 0 42 0;
+#X connect 28 0 42 0;
+#X connect 33 0 34 0;
+#X connect 33 1 37 1;
+#X connect 34 0 35 0;
+#X connect 35 0 37 0;
+#X connect 36 0 21 0;
+#X connect 37 0 38 0;
+#X connect 37 0 38 1;
+#X connect 42 0 12 0;
+#X connect 42 0 13 0;
+#X connect 42 0 33 0;
