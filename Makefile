@@ -2,6 +2,7 @@
 
 lib.name = tclpd
 
+DEBUG=1
 
 UNAME := $(shell uname -s)
 
@@ -37,7 +38,8 @@ TODO.txt \
 tclpd.tcl \
 $(wildcard examples/*-help.pd) \
 $(wildcard examples/*.tcl) \
-examples/bitmap-madness.pd
+examples/bitmap-madness.pd \
+examples/countingAveragerPd.pd
 
 # hack to get a proper default target
 all:

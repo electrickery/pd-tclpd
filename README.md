@@ -48,6 +48,7 @@ following procedures are made available (tclpd.tcl):
     proc get_binbuf {self} {
 
 
+Very old page, to be updated: https://electrickery.nl/digaud/puredata/tclPd/
 
 Fred Jan Kraan, 
 fjkraan@electrickery.nl,

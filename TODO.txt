@@ -4,12 +4,12 @@ TODO-list for tclpd (most important things first)
 - slider2.tcl is broken *
 - add (or check) GOP
 - signal externals? (really?)
-+ objects crash while receiving not-implemented messages. Fixed, error in error reporting
+- objects crash while receiving not-implemented messages. Fixed, error -
 - gui objects implement a broken properties panel
-+ Tcl/Tk errors are not shown, but crash Pd. Fixed, error in error reporting
+- Tcl/Tk errors are not shown, but crash Pd.
 - The tclpd-console.tcl is retired as a console to Pd functionality is 
   now standard in: File > Message...
-- introduced its own custom command to the patch file: #bitmap setdata 0 1 1 1 0 1;
+- bitmap introduced its own custom command to the patch file: #bitmap setdata 0 1 1 1 0 1;
 
 
 *) 
@@ -21,7 +21,7 @@ context-menu "Properties" not working:
 Tcl: object properties: failed
 tclpd error: TypeError in method 'gfxstub_new', argument 2 of type 'void *'
 (bitmap.tcl also has this issue)
-RAised error comes from tcl_wrap.c: SWIGINTERN int _wrap_gfxstub_new(...) {}
+Raised error comes from tcl_wrap.c: SWIGINTERN int _wrap_gfxstub_new(...) {}
 
 With send/receive messages specified, slider movement responds with:
 tclpd error: invalid command name "1005.sl-out" (1005 assumed to be $0)
