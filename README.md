@@ -50,6 +50,16 @@ following procedures are made available (tclpd.tcl):
     proc guiproc {name argz body} {                # mechanism for uploading procs to gui interp, without the hassle of escaping [encoder]
     proc get_binbuf {self} {
 
+## Extra
+
+Years ago I created some Pure data related Tcl scripts, and this library seems the best place
+to share them.
+
+    changeCoords.tcl - obfuscates patches by placing all objects at the same coordinates.
+    pdParse.tcl      - parses a patch and prints an annotated version. The original goal was
+                       to create a pd-patch 'sed'.
+
+## More information
 
 Very old page, to be updated: https://electrickery.nl/digaud/puredata/tclPd/
 
