@@ -39,7 +39,8 @@ tclpd.tcl \
 $(wildcard examples/*-help.pd) \
 $(wildcard examples/*.tcl) \
 examples/bitmap-madness.pd \
-examples/countingAveragerPd.pd
+examples/countingAveragerPd.pd \
+$(wildcard extra/*)
 
 # hack to get a proper default target
 all:
