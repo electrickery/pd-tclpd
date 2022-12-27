@@ -15,12 +15,15 @@ updating of documentation and help-files will also occur.
 
         bitmap.tcl       - bitmap graphical object; an interactive two-dimensional binary matrix 
         colorpicker.tcl  - helper object for the properties object
+        countingAveragerPd.tcl  - an object performing a Cumulative moving average, both in Tcl and Vanilla-pd
         dynreceive.tcl   - dynreceive object; a message receive object, with dynamic receive symbol
         dynroute.tcl     - dynroute object; dynamic routing of key-value sets based on key-output assignments
         helloWorld.tcl   - helloWorld; simple demo object demonstrating a basic object in Tcl
         list_change.tcl  - list_change object; demonstrated Tcl list operations and Pd-Tcl list interfacing 
+        midiseq3.tcl       simple midi sequencer
         properties.tcl   - helper object for graphical Tcl/Tk objects, for controlling the objects properties
         slider2.tcl      - slider2 graphical object; a reimplementation of the slider object
+        uMidiArpeg.tcl   - simple midi arpeggiator
 
 ## Helper routines
 
